@@ -18,6 +18,13 @@ import java.sql.SQLException;
 @WebServlet("/login")
 public class LoginPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private StoreDB storeDB;
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		storeDB = new StoreDB();
+	}
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,13 +34,13 @@ public class LoginPage extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String storeId = request.getParameter("storeId");
+		String storeNumber = request.getParameter("storeNumber");
 		String password = request.getParameter("password");
 		
-		if (isValidCredentials(storeId, password)) {
+		if (isValidCredentials(storeNumber, password)) {
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("storeId", storeId);
+			session.setAttribute("storeId", storeNumber);
 			response.sendRedirect("EmpListPage.jsp");
 		} else {
 			request.setAttribute("error", "Invalid credentials");
@@ -42,8 +49,8 @@ public class LoginPage extends HttpServlet {
 		
 	}
 	
-	private boolean isValidCredentials(String storeId, String password) {
-		return "user".equals(storeId) && "password".equals(password);
+	private boolean isValidCredentials(String storeNumber, String password) {
+		return storeDB.validateStoreCredentials(storeNumber, password);
 	}
 
 }
