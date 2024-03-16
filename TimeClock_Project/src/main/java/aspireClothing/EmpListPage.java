@@ -1,3 +1,4 @@
+package aspireClothing;
 
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/EmployeeList")
+@WebServlet("/employeeList")
 public class EmpListPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private StoreDB storeDB;
@@ -24,7 +25,7 @@ public class EmpListPage extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String storeId = (String) session.getAttribute("storeId");
+		String storeId = (String) session.getAttribute("storeNumber");
 		
 		List<Employee> employeeList = storeDB.getEmployeeList(storeId);
 		
@@ -39,3 +40,4 @@ public class EmpListPage extends HttpServlet {
 	}
 
 }
+

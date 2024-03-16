@@ -2,37 +2,40 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ page import="java.util.List" %>
+<%@ page import="aspireClothing.Employee" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Works!</title>
+<title>AspireClothing Employees</title>
 </head>
 <body>
 
 <h2>Employee List</h2> 
-<form action="employeeLogin" method="post">
+<form action="employeeList" method="post">
 
 	<ul>
 	<%
-	List<Employee> employeeList = (List<Employee>)request.getAttribute("employeeList");
-		for (Employee employee : employeeList) { %>
+	@SuppressWarnings("unchecked")
+		List<aspireClothing.Employee> employeeList= (List<aspireClothing.Employee>)request.getAttribute("employeeList");
+			for (aspireClothing.Employee employee : employeeList) {
+	%>
 		
 		<li>
 			<%= employee.getEmployeeFirstName() %> - <%= employee.getEmployeeLastName() %> - <%= employee.getEmployeeId() %> 
 				<input type="hidden" name="employeeId" value="<%= employee.getEmployeeId() %>">
 				
-				<label for="password">Employee Password:</label>
-				<input type="password" name="password" required><br>
+				<label for="storePassword">Employee Password:</label>
+				<input type="password" name="storePassword" required><br>
 	
 				<input type="submit" value="Login">
 			</li>
 			
 			<% } %>
 	
-	</ul>
-</form>
-
+		</ul>
+	</form>
 </body>
 </html>
+

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login Page</title>
+<title>Login</title>
 </head>
 
 <body>
@@ -17,14 +17,15 @@
 			<p<%= error %> p> 
 			<% } %>
 			
-	<label for="storeId">Store Number:</label>
-	<input type="text" id="storeId" name="storeId" required><br>
+	<label for="storeNumber">Store Number:</label>
+	<input type="text" id="storeNumber" name="storeNumber" required><br>
 	
-	<label for="password">Store Password:</label>
-	<input type="password" id="password" name="password" required><br>
+	<label for="storePassword">Store Password:</label>
+	<input type="password" id="storePassword" name="storePassword" required><br>
 	
 	<input type="submit" value="Submit">
 
 </form>
 </body>
 </html>
+

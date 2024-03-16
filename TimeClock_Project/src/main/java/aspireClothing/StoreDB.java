@@ -1,3 +1,4 @@
+package aspireClothing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDB {
-	private final String url = "jdbc:mysql://localhost:3306/aspireclothing?useSSL=false&serverTimezone=UTC";
-	private final String dbUsername = "root";
-	private final String dbPassword = "Aspire";
+	private final String url = "jdbc:mysql://localhost:3306/aspireclothing?user=root&password=Aspire";
 	
-	public boolean validateStoreCredentials(String storeNumber, String storePassword) {
-		try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword)){
+	public boolean validateStoreCredentials(String storeNumber, String storePassword) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		try (Connection connection = DriverManager.getConnection(url)) {
 			String query = "SELECT * FROM stores WHERE storeNumber = ? AND storePassword = ?";
 			
 			try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -26,14 +27,14 @@ public class StoreDB {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			throw e;
 		}
 	}
 	
 	public List<Employee> getEmployeeList(String storeNumber) {
 		List<Employee> employeeList = new ArrayList<>();
 		
-		try (Connection connection = DriverManager.getConnection(url, dbUsername, dbPassword)) {
+		try (Connection connection = DriverManager.getConnection(url)) {
 			String query = "SELECT * FROM employees WHERE storeNumber = ?";
 			
 			try (PreparedStatement statement = connection.prepareStatement(query)) {

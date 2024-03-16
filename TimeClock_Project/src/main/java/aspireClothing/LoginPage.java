@@ -1,3 +1,4 @@
+package aspireClothing;
 
 
 import java.io.IOException;
@@ -35,22 +36,28 @@ public class LoginPage extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String storeNumber = request.getParameter("storeNumber");
-		String password = request.getParameter("password");
+		String storePassword = request.getParameter("storePassword");
 		
-		if (isValidCredentials(storeNumber, password)) {
+		try {
+			if (isValidCredentials(storeNumber, storePassword)) {
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("storeNumber", storeNumber);
+				response.sendRedirect("employeeList");
+			} else {
+				request.setAttribute("error", "Invalid credentials");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+		} catch (ClassNotFoundException | IOException | ServletException | SQLException e) {
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("storeId", storeNumber);
-			response.sendRedirect("EmpListPage.jsp");
-		} else {
-			request.setAttribute("error", "Invalid credentials");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			e.printStackTrace();
 		}
 		
 	}
 	
-	private boolean isValidCredentials(String storeNumber, String password) {
-		return storeDB.validateStoreCredentials(storeNumber, password);
+	private boolean isValidCredentials(String storeNumber, String storePassword) throws ClassNotFoundException, SQLException {
+		return storeDB.validateStoreCredentials(storeNumber, storePassword);
 	}
 
 }
+

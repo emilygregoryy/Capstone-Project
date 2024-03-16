@@ -1,3 +1,4 @@
+package aspireClothing;
 
 public class Employee {
 	private String employeeId;
@@ -23,7 +24,7 @@ public class Employee {
 	}
 	
 	public void setEmployeeFirstName(String employeeFirstName) {
-		this.employeeId = employeeFirstName;
+		this.employeeFirstName = employeeFirstName;
 	}
 	
 	public String getEmployeeLastName() {
@@ -31,7 +32,7 @@ public class Employee {
 	}
 	
 	public void setEmployeeLastName(String employeeLastName) {
-		this.employeeId = employeeLastName;
+		this.employeeLastName = employeeLastName;
 	}
 
 }
