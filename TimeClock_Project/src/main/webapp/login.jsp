@@ -1,31 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Store Login</title>
+<style>
+	.input-box {
+		border: none;
+		padding: 10px;
+		background-color: #E5E3E6;
+		border-bottom: 3px solid #DEAAEB;
+		outline: none;
+		font-size: 16px;
+		width: 70%;
+	} 
+	
+.input-box::placeholder {
+		color: #999;
+	}
+	
+</style>
+
+<link rel="stylesheet" type="text/css" href="css/loginStyles.css">
 </head>
 
 <body>
 
-<h1>AspireClothing Time Clock</h1>
-
-<form action="login" method="post">
-	<% String error = (String)request.getAttribute("error");
-		if (error != null) { %>
-			<p<%= error %> p> 
-			<% } %>
+	<div class="container">
+		<div class="welcome-side">
+			<p class="chaos-text">Chaos Inc.</p>
 			
-	<label for="storeNumber">Store Number:</label>
-	<input type="text" id="storeNumber" name="storeNumber" required><br>
-	
-	<label for="storePassword">Store Password:</label>
-	<input type="password" id="storePassword" name="storePassword" required><br>
-	
-	<input type="submit" value="Submit">
+			<div class="decor-circle1"></div>
+			<div class="decor-circle2"></div>
+			<div class="decor-circle3"></div>
+			<div class="decor-circle4"></div>
+			<div class="decor-circle5"></div>
+			<div class="decor-circle6"></div>
+			
+			<div class="centered-welcome">
+				<h2>Welcome!</h2>
+				<br>
+				<h1>AspireClothing</h1>
+				<h3>Time Clock</h3>
+			</div>
+		</div>
 
-</form>
+		<div class="login-side">
+		
+		<div class="login-title">
+			<h2>Enter Store Details</h2>
+		</div>
+
+			<form action="login" method="post">
+				<%
+				String error = (String) request.getAttribute("error");
+				%>
+				<%
+				if (error != null) {
+				%>
+				<p class="error"><%=error%>
+				</p>
+				<%
+				}
+				%>
+
+				<div class="store-number-input">
+					<!-- <label for="storeNumber">Store Number:</label> --> 
+					<input type="text" id="storeNumber" name="storeNumber" class="input-box" placeholder="Store Number" required>
+				</div>
+
+				<div class="password-input">
+					<!-- <label for="storePassword">Store Password:</label> --> 
+					<input type="password" id="storePassword" name="storePassword" class="input-box" placeholder="Password" required>
+				</div>
+				
+				<div class="login-button">
+					<input type="submit" value="Continue">
+				</div>
+				
+				<h3 class="register-title">New Employee?</h3>
+				
+				<div class="register-button">
+					<input type="submit" value="Register">
+				</div>
+
+			</form>
+		</div>
+	</div>
 </body>
 </html>
 

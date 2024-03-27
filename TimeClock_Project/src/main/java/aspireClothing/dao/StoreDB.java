@@ -1,4 +1,4 @@
-package aspireClothing;
+package aspireClothing.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import aspireClothing.Employee;
 
 public class StoreDB {
 	private final String url = "jdbc:mysql://localhost:3306/aspireclothing?user=root&password=Aspire";
@@ -31,6 +33,23 @@ public class StoreDB {
 		}
 	}
 	
+	public boolean validateEmployeeCredentials(int employeeId, String emPassword) throws SQLException {
+		
+		try (Connection connection = DriverManager.getConnection(url)) {
+			String query = "SELECT * FROM employees WHERE employeeId = ? AND emPassword = ?";
+			
+			try (PreparedStatement statement = connection.prepareStatement(query)) {
+				statement.setInt(1, employeeId);
+				statement.setString(2, emPassword);
+				
+				try (ResultSet resultSet = statement.executeQuery()) {
+					return resultSet.next();
+				}
+			}
+			
+		}	
+	}
+	
 	public List<Employee> getEmployeeList(String storeNumber) {
 		List<Employee> employeeList = new ArrayList<>();
 		
@@ -41,7 +60,7 @@ public class StoreDB {
 				statement.setString(1, storeNumber);
 				try (ResultSet resultSet = statement.executeQuery()) {
 					while (resultSet.next()) {
-					String employeeId = resultSet.getString("employeeId");
+					int employeeId = resultSet.getInt("employeeId");
 					String employeeFirstName = resultSet.getString("firstName");
 					String employeeLastName = resultSet.getString("lastname");
 					employeeList.add(new Employee(employeeId, employeeFirstName, employeeLastName));
