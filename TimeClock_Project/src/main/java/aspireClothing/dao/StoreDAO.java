@@ -1,41 +1,37 @@
 package aspireClothing.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import aspireClothing.Employee;
+import aspireClothing.beans.User;
 
-public class StoreDB {
-	private final String url = "jdbc:mysql://localhost:3306/aspireclothing?user=root&password=Aspire";
+public class StoreDAO {
+	private Connection connection;
 	
-	public boolean validateStoreCredentials(String storeNumber, String storePassword) throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.cj.jdbc.Driver");
+	public StoreDAO() {
+		connection = DBConnection.getInstance().getConnection();
+	}
+	
+	public boolean validateStoreCredentials(int storeNumber, String storePassword) throws ClassNotFoundException, SQLException {
 		
-		try (Connection connection = DriverManager.getConnection(url)) {
 			String query = "SELECT * FROM stores WHERE storeNumber = ? AND storePassword = ?";
 			
 			try (PreparedStatement statement = connection.prepareStatement(query)) {
-				statement.setString(1, storeNumber);
+				statement.setInt(1, storeNumber);
 				statement.setString(2, storePassword);
 				
 				try (ResultSet resultSet = statement.executeQuery()) {
 					return resultSet.next();
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		}
 	}
 	
 	public boolean validateEmployeeCredentials(int employeeId, String emPassword) throws SQLException {
 		
-		try (Connection connection = DriverManager.getConnection(url)) {
 			String query = "SELECT * FROM employees WHERE employeeId = ? AND emPassword = ?";
 			
 			try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -45,32 +41,38 @@ public class StoreDB {
 				try (ResultSet resultSet = statement.executeQuery()) {
 					return resultSet.next();
 				}
-			}
-			
-		}	
-	}
+			}	
+	}	
 	
-	public List<Employee> getEmployeeList(String storeNumber) {
-		List<Employee> employeeList = new ArrayList<>();
-		
-		try (Connection connection = DriverManager.getConnection(url)) {
+	public List<User> getEmployeeList(int storeNumber) throws SQLException {
+		List<User> employeeList = new ArrayList<>();
 			String query = "SELECT * FROM employees WHERE storeNumber = ?";
 			
 			try (PreparedStatement statement = connection.prepareStatement(query)) {
-				statement.setString(1, storeNumber);
+				statement.setInt(1, storeNumber);
 				try (ResultSet resultSet = statement.executeQuery()) {
 					while (resultSet.next()) {
 					int employeeId = resultSet.getInt("employeeId");
-					String employeeFirstName = resultSet.getString("firstName");
-					String employeeLastName = resultSet.getString("lastname");
-					employeeList.add(new Employee(employeeId, employeeFirstName, employeeLastName));
+					String firstName = resultSet.getString("firstName");
+					String lastName = resultSet.getString("lastName");
+					String jobTitle = resultSet.getString("jobTitle");
+					String emPassword = resultSet.getString("emPassword");
+					int phoneNumber = resultSet.getInt("phoneNumber");
+					employeeList.add(new User(employeeId, firstName, lastName, jobTitle, emPassword, storeNumber, phoneNumber));
 				}
 			}
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
 	return employeeList;
 
+	}
+	
+	public void close() {
+		try {
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -66,12 +66,12 @@
 				%>
 
 				<div class="store-number-input">
-					<!-- <label for="storeNumber">Store Number:</label> --> 
+					<!-- store number input </label> --> 
 					<input type="text" id="storeNumber" name="storeNumber" class="input-box" placeholder="Store Number" required>
 				</div>
 
 				<div class="password-input">
-					<!-- <label for="storePassword">Store Password:</label> --> 
+					<!-- store password input --> 
 					<input type="password" id="storePassword" name="storePassword" class="input-box" placeholder="Password" required>
 				</div>
 				
@@ -80,12 +80,13 @@
 				</div>
 				
 				<h3 class="register-title">New Employee?</h3>
-				
-				<div class="register-button">
-					<input type="submit" value="Register">
-				</div>
 
 			</form>
+			<div class="register-button">
+					<form action="registerUser" method="get">
+						<input type="submit" value="Register">
+					</form>
+				</div>
 		</div>
 	</div>
 </body>

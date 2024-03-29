@@ -11,29 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import aspireClothing.Employee;
-import aspireClothing.dao.StoreDB;
+import aspireClothing.beans.User;
+import aspireClothing.dao.StoreDAO;
 
 @WebServlet("/employeeList")
 public class EmpListPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private StoreDB storeDB;
+	private StoreDAO storeDAO;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		storeDB = new StoreDB();
+		storeDAO = new StoreDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String storeId = (String) session.getAttribute("storeNumber");
-
-		List<Employee> employeeList = storeDB.getEmployeeList(storeId);
-
-		request.setAttribute("employeeList", employeeList);
-		request.getRequestDispatcher("EmpListPage.jsp").forward(request, response);
+		int storeNumber = (int) session.getAttribute("storeNumber");
+		
+		List<User> employeeList;
+		try {
+			employeeList = storeDAO.getEmployeeList(storeNumber);
+			request.setAttribute("employeeList", employeeList);
+			request.getRequestDispatcher("EmpListPage.jsp").forward(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -46,7 +50,7 @@ public class EmpListPage extends HttpServlet {
 		session.setAttribute("employeeId", employeeId);
 
 		try {
-			if (storeDB.validateEmployeeCredentials(employeeId, emPassword)) {
+			if (storeDAO.validateEmployeeCredentials(employeeId, emPassword)) {
 				request.getRequestDispatcher("timeClock.jsp").forward(request, response);
 			} else {
 				response.sendRedirect("EmpListPage.jsp");

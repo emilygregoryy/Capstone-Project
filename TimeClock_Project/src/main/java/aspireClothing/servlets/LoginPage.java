@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import aspireClothing.dao.StoreDB;
+import aspireClothing.dao.StoreDAO;
 
 import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private StoreDB storeDB;
+	private StoreDAO storeDAO;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		storeDB = new StoreDB();
+		storeDAO = new StoreDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class LoginPage extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String storeNumber = request.getParameter("storeNumber");
+		int storeNumber = Integer.parseInt(request.getParameter("storeNumber"));
 		String storePassword = request.getParameter("storePassword");
 
 		try {
@@ -52,9 +52,9 @@ public class LoginPage extends HttpServlet {
 
 	}
 
-	private boolean isValidCredentials(String storeNumber, String storePassword)
+	private boolean isValidCredentials(int storeNumber, String storePassword)
 			throws ClassNotFoundException, SQLException {
-		return storeDB.validateStoreCredentials(storeNumber, storePassword);
+		return storeDAO.validateStoreCredentials(storeNumber, storePassword);
 	}
 
 }

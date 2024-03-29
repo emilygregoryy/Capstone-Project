@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ page import="java.util.List" %>
-<%@ page import="aspireClothing.Employee" %>
+<%@ page import="aspireClothing.beans.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,10 +26,10 @@
 
 	<%
 	@SuppressWarnings("unchecked")
-		List<Employee> employeeList= (List<Employee>)request.getAttribute("employeeList");
-			for (Employee employee : employeeList) {
+			List<User> employeeList= (List<User>)request.getAttribute("employeeList");
+		for (User employee : employeeList) {
 	%>
-		<option value="<%= employee.getEmployeeId() %>"><%= employee.getEmployeeFirstName() %> <%= employee.getEmployeeLastName() %></option>
+		<option value="<%= employee.getEmployeeId() %>"><%= employee.getFirstName() %> <%= employee.getLastName() %></option>
 		<% } %>
 		</select>
 		
