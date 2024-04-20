@@ -28,7 +28,7 @@ public class RegisterUserServlet extends HttpServlet {
 		String jobTitle = req.getParameter("jobTitle");
 		String emPassword = req.getParameter("emPassword");
 		int storeNumber = Integer.parseInt(req.getParameter("storeNumber"));
-		int phoneNumber = Integer.parseInt(req.getParameter("phoneNumber"));
+		String phoneNumber = req.getParameter("phoneNumber");
 		
 		User employee = new User(employeeId, firstName, lastName, jobTitle, emPassword, storeNumber, phoneNumber);
 		
@@ -39,8 +39,6 @@ public class RegisterUserServlet extends HttpServlet {
 
 		String page = getHTMLString(req.getServletContext().getRealPath("/html/register.html"), infoMessage);
 		resp.getWriter().write(page);
-				
-				
 	}
 	
 	public String getHTMLString(String filePath, String message) throws IOException{
@@ -54,7 +52,6 @@ public class RegisterUserServlet extends HttpServlet {
 		}
 		
 		String page = buffer.toString();
-		
 		return MessageFormat.format(page, message);	
 		
 		}

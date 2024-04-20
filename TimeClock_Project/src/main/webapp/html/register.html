@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Chaos</title>
-<!-- <link rel="stylesheet" href="css/style.css"> -->
+<link rel="stylesheet" href="css/registerStyles.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<section id="registration" class="section">
-	 <div class="container tagline">
-	 <em>Register User</em><br/>
+	 <div class="container">
+	 <h2>Register User</h2><br/>
 	 <em>{0}</em>
 		<form action="registerUser" method="post">
 			<label>Employee ID</label> <input type="text" name="employeeId" id="employeeId"><br/>
@@ -22,10 +22,12 @@
 			<input type="submit" value="Submit" id="submit">
 		</form>
 		
+			<form action="login" method="get">
 			<div class="back-button">
 				<p>To go to the login page:</p>
-				<input type="submit" value="Back">
+				<input type="submit" value="Back" class="back">
 			</div>
+			</form>
 		</div>
 	</section>
 

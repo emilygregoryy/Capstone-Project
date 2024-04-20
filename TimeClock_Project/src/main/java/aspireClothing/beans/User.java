@@ -7,10 +7,10 @@ public class User {
 	private String jobTitle;
 	private String emPassword;
 	private int storeNumber;
-	private int phoneNumber;
+	private String phoneNumber;
 	
 	public User(int employeeId, String firstName, String lastName, String jobTitle,
-						String emPassword, int storeNumber, int phoneNumber) {
+						String emPassword, int storeNumber, String phoneNumber) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,11 +68,11 @@ public class User {
 		this.storeNumber = storeNumber;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	

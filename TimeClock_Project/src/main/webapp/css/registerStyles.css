@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+body {
+	display: flex;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+    background-image: linear-gradient(to bottom, #DEAAEB, #C04EDD, #8411A2);
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+    background-color: #F8F4F9; /* Keep the section white */
+    border: 2px solid black;
+    border-radius: 5px;  
+    box-shadow: 0 10px 30px #420850;
+    text-align: center;
+    height: 800px;
+    width: 600px;
+}
+
+input[type="submit"] {
+	margin-bottom: 40px;
+    background-color: #512e5f; /* Dark purple button */
+    color: #fff; 
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 100px;
+}
+
+input[type="submit"]:hover {
+	background-color: #8411A2;
+}
+
+label {
+	width: 120px;
+	text-align: left;
+	display: inline-block;
+    margin-bottom: 10px; /* Reduce label spacing */
+}
+
+input[type="text"] {
+	border-bottom: 3px solid #DEAAEB;
+    margin-bottom: 30px; /* Less input spacing */
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 5px;
+    box-shadow: 4px 4px 8px #DEAAEB;
+}
+
+.container h2 { /* Style the 'Register User' text */
+	margin-top: 50px;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: bold;
+    color: #333; /* Dark text */
+}
+
+.back-button {
+	font-weight: bold;
+	font-size: 18px;
+	text-align: left;
+	margin-left: 20px;
+}
+
+.back-button .back {
+	margin-left: 40px;
+	padding: 5px;
+	width: 80px;
+}
+

@@ -24,7 +24,7 @@ public class RegisterDAO {
 			statement.setString(4, employee.getJobTitle());
 			statement.setString(5, employee.getEmPassword());
 			statement.setInt(6, employee.getStoreNumber());
-			statement.setInt(7, employee.getPhoneNumber());
+			statement.setString(7, employee.getPhoneNumber());
 			
 			int rowsAffected = statement.executeUpdate();
 			return rowsAffected > 0;

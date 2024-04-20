@@ -57,7 +57,7 @@ public class StoreDAO {
 					String lastName = resultSet.getString("lastName");
 					String jobTitle = resultSet.getString("jobTitle");
 					String emPassword = resultSet.getString("emPassword");
-					int phoneNumber = resultSet.getInt("phoneNumber");
+					String phoneNumber = resultSet.getString("phoneNumber");
 					employeeList.add(new User(employeeId, firstName, lastName, jobTitle, emPassword, storeNumber, phoneNumber));
 				}
 			}

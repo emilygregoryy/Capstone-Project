@@ -34,7 +34,7 @@ public class EmpListPage extends HttpServlet {
 		try {
 			employeeList = storeDAO.getEmployeeList(storeNumber);
 			request.setAttribute("employeeList", employeeList);
-			request.getRequestDispatcher("EmpListPage.jsp").forward(request, response);
+			request.getRequestDispatcher("employeeList.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +53,7 @@ public class EmpListPage extends HttpServlet {
 			if (storeDAO.validateEmployeeCredentials(employeeId, emPassword)) {
 				request.getRequestDispatcher("timeClock.jsp").forward(request, response);
 			} else {
-				response.sendRedirect("EmpListPage.jsp");
+				response.sendRedirect("employeeList.jsp");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -20,6 +20,8 @@
 </head>
 <body>
 
+<div class="container">
+<div class="emp-list">
 <h2>Employee List</h2> 
 	<form action="employeeList" method="post">
 		<select id="employeeList" name="employeeId" onchange="updateHiddenInputs()">
@@ -32,13 +34,14 @@
 		<option value="<%= employee.getEmployeeId() %>"><%= employee.getFirstName() %> <%= employee.getLastName() %></option>
 		<% } %>
 		</select>
-		
+
 		<input type="hidden" id="employeeId" name="employeeId" value="">
 		<label for="employeePassword">Employee Password:</label>
 		<input type="password" id="employeePassword" name="employeePassword" required>
 		<input type="submit" value="Login">
-
 	</form>
+</div>
+</div>
 </body>
 </html>
 

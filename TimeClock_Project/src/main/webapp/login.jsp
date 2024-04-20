@@ -79,6 +79,8 @@
 					<input type="submit" value="Continue">
 				</div>
 				
+				<p>Forgot Password <a href="http://localhost:8080/TimeClock_Project/recoverPassword.jsp">here.</a></p>
+				
 				<h3 class="register-title">New Employee?</h3>
 
 			</form>

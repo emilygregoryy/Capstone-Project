@@ -11,7 +11,7 @@ public class DBConnection {
 	private DBConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/aspireclothing?user=root&password=Aspire";
+			String url = "jdbc:mysql://localhost:3306/aspireclothing?user=root&password=";
 			connection = DriverManager.getConnection(url);
 				System.out.println("Database connection successful!");
 		} catch (ClassNotFoundException | SQLException e) {
